@@ -62,3 +62,13 @@ fun combine (Empty, Empty) = Empty
   | combine (Cons(a,l1), Cons(b,l2)) = Cons(a, combine(l1,Cons(b,l2)))
 
 
+fun combine_c (Empty)(l2) = l2
+  | combine_c (Cons(a,l1))(l2)  = Cons(a, combine_c(l1)(l2))
+
+fun base(l2) = l2
+
+fun combine_s (Empty) = base
+  | combine_s (Cons(a,l1)) = make_cons(a, combine_s(l1))
+and
+    make_cons(a, f)(l2) =
+	Cons(a, f(l2))
