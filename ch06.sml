@@ -40,18 +40,18 @@ fun eq_fruit(x: fruit, y: fruit) = x=y
 
 fun subst_in_tree (n, a, Bud) = Bud
   | subst_in_tree (n, a, Flat(f, t)) = 
-	if eq_fruit(a, f)
-	then Flat(n, subst_in_tree(n, a, t))
+    if eq_fruit(a, f)
+    then Flat(n, subst_in_tree(n, a, t))
     else Flat(f, subst_in_tree(n, a, t))
   | subst_in_tree (n, a, Split(s, t)) = Split(subst_in_tree(n, a, s), subst_in_tree(n, a, t))
 
 fun occurs (a, Bud) = 0
   | occurs (a, Flat(f, t)) = 
-	if eq_fruit(a, f)
-	then 1 + occurs(a, t)
-	else occurs(a, t)
+    if eq_fruit(a, f)
+    then 1 + occurs(a, t)
+    else occurs(a, t)
   | occurs (a, Split(s, t)) =
-	occurs(a, s) + occurs(a, t)
+    occurs(a, s) + occurs(a, t)
 
 datatype
   'a slist =
@@ -66,19 +66,19 @@ fun occurs_in_slist (a, Empty) = 0
   | occurs_in_slist (a, Scons(s, y)) = occurs_in_sexp(a, s) + occurs_in_slist(a, y)
 and
   occurs_in_sexp (a, An_atom(b)) = 
-	if eq_fruit(a, b)
-	then 1
-	else 0
+    if eq_fruit(a, b)
+    then 1
+    else 0
   | occurs_in_sexp (a, A_slist(y)) = occurs_in_slist(a, y)
 
 fun subst_in_slist (n, a, Empty) = Empty
   | subst_in_slist (n, a, Scons(s, y)) = 
-	Scons(subst_in_sexp(n, a, s), subst_in_slist(n, a, y))
+    Scons(subst_in_sexp(n, a, s), subst_in_slist(n, a, y))
 and 
   subst_in_sexp (n, a, An_atom(b)) =
-	if eq_fruit(a, b)
-	then An_atom(n)
-	else An_atom(b)
+    if eq_fruit(a, b)
+    then An_atom(n)
+    else An_atom(b)
   | subst_in_sexp (n, a, A_slist(y)) = A_slist(subst_in_slist(n, a, y))
 
 fun eq_fruit_in_atom (a, An_atom(s)) = eq_fruit(a, s)
@@ -86,8 +86,8 @@ fun eq_fruit_in_atom (a, An_atom(s)) = eq_fruit(a, s)
 
 fun rem_from_slist (a, Empty) = Empty
   | rem_from_slist (a, Scons(s, y)) = 
-	if eq_fruit_in_atom(a, s)
-	then rem_from_slist(a, y)
+    if eq_fruit_in_atom(a, s)
+    then rem_from_slist(a, y)
     else Scons(rem_from_sexp(a, s), rem_from_slist(a, y))
 and 
   rem_from_sexp (a, An_atom(b)) = An_atom(b)
@@ -95,11 +95,11 @@ and
 
 fun rem_from_slist (a, Empty) = Empty
   | rem_from_slist (a, Scons(An_atom(b), y)) = 
-	if eq_fruit(a, b)
-	then rem_from_slist(a, y)
+    if eq_fruit(a, b)
+    then rem_from_slist(a, y)
     else Scons(An_atom(b), rem_from_slist(a, y))
   | rem_from_slist (a, Scons(A_slist(x), y)) = 
-	Scons(A_slist(rem_from_slist(a, x)), rem_from_slist(a, y))
+    Scons(A_slist(rem_from_slist(a, x)), rem_from_slist(a, y))
 
 
 

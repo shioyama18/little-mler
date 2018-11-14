@@ -21,29 +21,29 @@ fun eq_fish (x: fish, y: fish) = x=y
 
 fun rem_fish (x, Bottom) = Bottom
   | rem_fish (x, Topping(t, p)) = 
-	if eq_fish(x, t)
+    if eq_fish(x, t)
     then rem_fish(x, p)
     else Topping(t, rem_fish(x, p))
 
 fun subst_fish (n, a, Bottom) = Bottom
   | subst_fish (n, a, Topping(t, p)) = 
-	if eq_fish(a, t)
-	then Topping(n, subst_fish(n, a, p))
-	else Topping(t, subst_fish(n, a, p))
+    if eq_fish(a, t)
+    then Topping(n, subst_fish(n, a, p))
+    else Topping(t, subst_fish(n, a, p))
 
 fun eq_int (x: int, y: int) = x=y
 
 fun rem_int (x, Bottom) = Bottom
   | rem_int (x, Topping(t, p)) = 
-	if eq_int(x, t)
-	then rem_int(x, p)
-	else Topping(t, rem_int(x, p))
+    if eq_int(x, t)
+    then rem_int(x, p)
+    else Topping(t, rem_int(x, p))
 
 fun subst_int (n, a, Bottom) = Bottom
   | subst_int (n, a, Topping(t, p)) = 
-	if eq_int(a, t)
-	then Topping(n, subst_int(n, a, p))
-	else Topping(t, subst_int(n, a, p))
+    if eq_int(a, t)
+    then Topping(n, subst_int(n, a, p))
+    else Topping(t, subst_int(n, a, p))
 
 
 datatype num = 

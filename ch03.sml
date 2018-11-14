@@ -20,8 +20,8 @@ fun top_anchovy_with_cheese (Crust) = Crust
   | top_anchovy_with_cheese (Sausage(x)) = Sausage(top_anchovy_with_cheese(x))
 
 fun subst_anchovy_by_cheese(x) = 
-	remove_anchovy(
-		top_anchovy_with_cheese(x))
+    remove_anchovy(
+        top_anchovy_with_cheese(x))
 
 fun subst_anchovy_by_cheese (Crust) = Crust
   | subst_anchovy_by_cheese (Cheese(x)) = Cheese(subst_anchovy_by_cheese(x))
